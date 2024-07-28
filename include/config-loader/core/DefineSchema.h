@@ -9,8 +9,7 @@
 #include <cstddef>
 #include <config-loader/utils/RepeatMacro.h>
 
-#define FIELD_EACH(i, arg)                     \
-    PAIR(arg);                                 \
+#define FIELD_WITHOUT_TYPE(i, arg)             \
     template <typename T>                      \
     struct FIELD<T, i> {                       \
         T& obj;                                \
@@ -23,6 +22,16 @@
         }                                      \
     };                                         \
 
+#define REFLECT(...)                                                                        \
+    template <typename, size_t> struct FIELD;                                               \
+    static constexpr size_t _field_count_ = GET_ARG_COUNT(__VA_ARGS__);                     \
+    static constexpr decltype(#st) _schema_name_ = #st;                                     \       
+    EXPAND(PASTE(REPEAT_, GET_ARG_COUNT(__VA_ARGS__)) (FIELD_WITHOUT_TYPE, 0, __VA_ARGS__)) 
+
+#define FIELD_EACH(i, arg)                     \
+    PAIR(arg);                                 \
+    FIELD_WITHOUT_TYPE(i, arg)                 \
+
 #define DEFINE_SCHEMA(st, ...)                                                          \
     struct st {                                                                         \
         template <typename, size_t> struct FIELD;                                       \
@@ -30,6 +39,8 @@
         static constexpr decltype(#st) _schema_name_ = #st;                             \
         EXPAND(PASTE(REPEAT_, GET_ARG_COUNT(__VA_ARGS__)) (FIELD_EACH, 0, __VA_ARGS__)) \
     }                                                                                   \
+
+
 
 #define ALIAS_COMPOUND_TYPE(_alias, _compoundType)                  \
     struct _alias: PARE _compoundType {                             \

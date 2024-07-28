@@ -18,6 +18,15 @@ DEFINE_SCHEMA(Rect,
               (Point) p2,
               (uint32_t) color);
 
+// reflect a custom type
+struct Circle{
+    REFLECT(center, r)
+    Point center;
+    int r;
+    // function ...
+    double getArea(){}
+};
+
 // vector and string
 DEFINE_SCHEMA(SomeOfPoints,
               (std::string) name,

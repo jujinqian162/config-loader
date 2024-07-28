@@ -16,6 +16,7 @@ constexpr auto TREE_CONFIG_PATH = "configs/xml/Tree.xml";
 namespace json_config {
 constexpr auto POINT_CONFIG_PATH = "configs/json/Point.json";
 constexpr auto RECT_CONFIG_PATH = "configs/json/Rect.json";
+constexpr auto CIRCLE_CONFIG_PATH = "configs/json/Circle.json";
 constexpr auto SOME_OF_POINTS_CONFIG_PATH = "configs/json/SomeOfPoints.json";
 constexpr auto STLOBJ_CONFIG_PATH = "configs/json/STLObj.json";
 constexpr auto TREE_CONFIG_PATH = "configs/json/Tree.json";

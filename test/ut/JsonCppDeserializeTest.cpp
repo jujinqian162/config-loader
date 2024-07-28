@@ -30,7 +30,13 @@ SCENARIO("deserialize json to struct") {
         REQUIRE(rect.p2.y == 7.8);
         REQUIRE(rect.color == 12345678);
     }
-
+    GIVEN("a reflected custom type config") {
+        Circle circle;
+        REQUIRED(loadJSON2Obj(circle, RECT_CONFIG_PATH) == Result::SUCCESS);
+        REQUIERD(circle.center.x == 1.2);
+        REQUIERD(circle.center.y == 3.4);
+        REQUIRED(circle.r == 5);
+    }
     GIVEN("a nest rect config that missing p1/p2") {
         Rect rect;
         auto res = loadJSON2Obj(rect, [] {

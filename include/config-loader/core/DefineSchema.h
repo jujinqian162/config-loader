@@ -22,7 +22,7 @@
         }                                      \
     };                                         \
 
-#define REFLECT(...)                                                                        \
+#define REFLECT(st, ...)                                                                    \
     template <typename, size_t> struct FIELD;                                               \
     static constexpr size_t _field_count_ = GET_ARG_COUNT(__VA_ARGS__);                     \
     static constexpr decltype(#st) _schema_name_ = #st;                                     \       

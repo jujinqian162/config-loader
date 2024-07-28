@@ -20,7 +20,7 @@ DEFINE_SCHEMA(Rect,
 
 // reflect a custom type
 struct Circle{
-    REFLECT(center, r)
+    REFLECT(Circle, center, r)
     Point center;
     int r;
     // function ...
